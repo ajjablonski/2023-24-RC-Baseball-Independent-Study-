@@ -108,7 +108,6 @@ for (i in 1:nrow(roanoke_pitching)){
 }
 
 
-#roanoke_pitching<-filter(roanoke_pitching$PlayResult=="Single"| roanoke_pitching$PlayResult=="Double"| roanoke_pitching$PlayResult=="Triple"| roanoke_pitching$PlayResult=="HomeRun")
 roanoke_pitching<-mutate(roanoke_pitching, Slugging = 0)
 for (i in 1:nrow(roanoke_pitching)){
   if(roanoke_pitching$PlayResult[i]=="Single"){
@@ -251,7 +250,7 @@ pitcher <- title(roanoke_pitching$Pitcher[i])
 # library
 library(ggplot2)
 
-# create a datase
+# create a dataset
 count <- c(rep("0-0" , 7) , rep("0-1" , 7) , rep("0-2" , 7) , rep("1-0" , 7), rep("1-1" , 7), rep("1-2" , 7), rep("2-0" , 7), rep("2-1" , 7), rep("2-2" , 7), rep("3-0" , 7), rep("3-1" , 7), rep("3-2" , 7))
 PitchTypes <- rep(c("Fastball" , "Sinker" , "Changeup" , "Slider", "Curveball" , "Cutter" , "Other") , 12)
 #value <- abs(rnorm(12 , 0 , 15))
@@ -268,17 +267,6 @@ ggplot(data, aes(fill=PitchTypes, y=value, x=count)) +
   ggtitle(roanoke_pitching$Pitcher) +
   scale_fill_manual(values = c("green","darkgreen","blue","red","pink","orange","gold"))
 
-K_zone_plot <- ggplot(roanoke_pitching, aes(x=PlateLocSide, y=PlateLocHeight))+
-    geom_rect(xmin=-0.947, xmax=0.947, ymin=1.5,
-              ymax=3.6, fill="lightblue", alpha=0.1)+
-    coord_equal()+
-    scale_x_continuous("Horizontal location (ft.)",
-                      limits=c(-2,2))+
-    scale_y_continuous("Vertical location (ft.)",
-                      limits=c(0,5))
-K_zone_plot +
-  geom_point(aes(color=factor(TaggedPitchType))) +
-  scale_color_manual("Pitch Type", values= c("green","darkgreen","blue","red","pink","orange","gold"))
     
                      
 
